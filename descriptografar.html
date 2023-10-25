@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"> <!-- Adicionado o conjunto de caracteres UTF-8 -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/6.0.7/imask.min.js"></script>
+    <title>Descriptografar | 3° Infonet</title>
+    <link rel="shortcut icon" href="https://i.imgur.com/81C14qg.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class='box'>
+        <div class='box-form'>
+            <div class='box-login-tab'></div>
+            <div class='box-login-title'>
+                <div class='i i-login'></div>
+                <h2 style="font-size: 14px;">DESCRIPTOGRAFAR</h2>
+            </div>
+            <div class='box-login'>
+                <div class='fieldset-body' id='login_form'>
+                    <p class='field'>
+                        <label for='encrypted_message'>MENSAGEM CRIPTOGRAFADA</label>
+                        <input type='text' id='encrypted_message' name='encrypted_message' title='Digite a mensagem criptografada...' placeholder="Digite a mensagem criptografada..." />
+                        <span id='valida' class='i i-warning'></span>
+                    </p>
+                    <p class='field'>
+                        <label for='decrypted_message'>MENSAGEM DESCRIPTOGRAFADA</label>
+                        <input type='text' id='decrypted_message' name='decrypted_message' title='Mensagem descriptografada...' placeholder='Sua mensagem...'' disabled/>
+                    </p>
+                    <input type='button' id='decrypt_message' value='DESCRIPTOGRAFAR MENSAGEM' title='DESCRIPTOGRAFAR MENSAGEM' onclick='decryptMessage()' />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function decryptMessage() {
+            const encryptedMessageInput = document.getElementById('encrypted_message');
+            const decryptedMessageInput = document.getElementById('decrypted_message');
+            const encryptedMessage = encryptedMessageInput.value;
+            // Converte o código binário em texto
+            const binaryArray = encryptedMessage.split(' ');
+            const text = binaryArray.map(bin => String.fromCharCode(parseInt(bin, 2))).join('');
+            decryptedMessageInput.value = text;
+        }
+    
+        const encryptedMessageInput = document.getElementById('encrypted_message');
+        encryptedMessageInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter' || event.keyCode === 13) {
+                decryptMessage();
+            }
+        });
+    </script>
+    
+</body>
+</html>
